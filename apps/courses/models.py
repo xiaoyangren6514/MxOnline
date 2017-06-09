@@ -18,6 +18,9 @@ class Course(models.Model):
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = '课程'
         verbose_name_plural = verbose_name
@@ -27,6 +30,9 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
     name = models.CharField(max_length=100, verbose_name='章节名称')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = '章节'
@@ -38,6 +44,9 @@ class Video(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     lesson = models.ForeignKey(Lesson, verbose_name='章节')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = '视频'
         verbose_name_plural = verbose_name
@@ -48,6 +57,9 @@ class CourseResource(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     course = models.ForeignKey(Course, verbose_name='课程')
     download = models.FileField(upload_to='courses/resource/%Y/%M', max_length=100, verbose_name='下载地址')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = '课程资源'
