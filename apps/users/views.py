@@ -45,7 +45,7 @@ class LoginView(View):
                 })
         else:
             return render(request, 'login.html', {
-                'login_form': login_form.errors
+                'login_form': login_form,
             })
 
 
