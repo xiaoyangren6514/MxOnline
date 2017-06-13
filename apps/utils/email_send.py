@@ -31,3 +31,9 @@ def send_register_email(email, type='register'):
         status = send_mail(email_title, email_content, EMAIL_FROM, [email])
         if status:
             pass
+    elif type == 'forget':
+        email_title = '猪八戒背媳妇网站忘记密码邮件'
+        email_content = '欢迎注册，请点击以下链接完成注册:http://127.0.0.1:8000/reset/{0}'.format(email_record.code)
+        status = send_mail(email_title, email_content, EMAIL_FROM, [email])
+        if status:
+            pass
