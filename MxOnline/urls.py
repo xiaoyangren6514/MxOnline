@@ -18,9 +18,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 import xadmin
+from django.views.static import serve
+
 import users.views as uv
 from users.views import LoginView, RegisterView, ActiveView, ForgetPwdView, ResetPwdView, ModifyPwdView
 from organization.views import OrgView
+from MxOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -39,6 +42,8 @@ urlpatterns = [
     # url(r'^register/$', TemplateView.as_view(template_name='register.html'), name='register'),
 
     # 课程机构模块
-    url(r'^org_list/$', OrgView.as_view(), name='org_list')
+    url(r'^org_list/$', OrgView.as_view(), name='org_list'),
+    # 配置上传文件的URL访问
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
 ]

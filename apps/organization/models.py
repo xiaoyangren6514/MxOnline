@@ -28,6 +28,8 @@ class CourseOrg(models.Model):
     address = models.CharField(max_length=150, verbose_name='课程机构地址')
     city = models.ForeignKey(CityDict, verbose_name='城市')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    category = models.CharField(max_length=20, choices=(('pxjg', '培训机构'), ('xs', '学校'), ('gr', '个人')), default='pxjg',
+                                verbose_name='机构类型')
 
     def __str__(self):
         return self.name
