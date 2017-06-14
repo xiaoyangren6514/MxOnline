@@ -24,7 +24,7 @@ class CourseOrg(models.Model):
     desc = models.TextField(verbose_name='机构描述')
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏数')
-    image = models.ImageField(upload_to='org/%Y/%M', verbose_name='封面图')
+    image = models.ImageField(upload_to='org/%Y/%m', verbose_name='logo')
     address = models.CharField(max_length=150, verbose_name='课程机构地址')
     city = models.ForeignKey(CityDict, verbose_name='城市')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
