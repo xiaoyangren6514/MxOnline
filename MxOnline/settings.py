@@ -135,9 +135,14 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# 发邮件配置信息
 EMAIL_HOST = 'smtp.sina.cn'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '13552209513m@sina.cn'
 EMAIL_HOST_PASSWORD = '12345qwert'
 EMAIL_FROM = '13552209513m@sina.cn'
 EMAIL_USE_TLS = False
+
+# 文件上传配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 import xadmin
 import users.views as uv
 from users.views import LoginView, RegisterView, ActiveView, ForgetPwdView, ResetPwdView, ModifyPwdView
+from organization.views import OrgView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -36,4 +37,8 @@ urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     # url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
     # url(r'^register/$', TemplateView.as_view(template_name='register.html'), name='register'),
+
+    # 课程机构模块
+    url(r'^org_list/$', OrgView.as_view(), name='org_list')
+
 ]
