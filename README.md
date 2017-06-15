@@ -10,3 +10,4 @@ init,add xadmin
     pip uninstall xadmin
     pip install Pillow
     pip install django-simple-captcha==0.4.6
+    pip install django-pure-pagination
