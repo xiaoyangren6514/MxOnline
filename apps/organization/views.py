@@ -50,3 +50,8 @@ class OrgView(View):
             'hot_orgs': hot_orgs,
             'sort': sort
         })
+
+
+class AddUserAskView(View):
+    def post(self,request):
+        pass
