@@ -23,7 +23,7 @@ class OrgView(View):
             all_orgs = all_orgs.filter(category=category)
 
         # 根据课程数或者学习人数进行排序
-        sort = request.GET.get('sort','')
+        sort = request.GET.get('sort', '')
         if sort:
             if sort == 'students':
                 all_orgs = all_orgs.order_by('-students')
@@ -46,7 +46,7 @@ class OrgView(View):
             'all_orgs': orgs,
             'orgs_count': orgs_count,
             'city_id': city_id,
-            'ct':category,
-            'hot_orgs':hot_orgs,
-            'sort':sort
+            'ct': category,
+            'hot_orgs': hot_orgs,
+            'sort': sort
         })
