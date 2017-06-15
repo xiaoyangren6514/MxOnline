@@ -30,6 +30,8 @@ class CourseOrg(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     category = models.CharField(max_length=20, choices=(('pxjg', '培训机构'), ('xs', '学校'), ('gr', '个人')), default='pxjg',
                                 verbose_name='机构类型')
+    students = models.IntegerField(default=0, verbose_name='学习人数')
+    course_count = models.IntegerField(default=0, verbose_name='课程数')
 
     def __str__(self):
         return self.name
