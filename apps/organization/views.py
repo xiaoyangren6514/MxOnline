@@ -63,3 +63,37 @@ class AddUserAskView(View):
             return HttpResponse("{'status':'success'}", content_type='application/json')
         else:
             return HttpResponse("{'status':'fail','msg':'添加出错'}", content_type='application/json')
+
+
+class OrgDetailView(View):
+    """
+    机构详情首页
+    """
+
+    def get(self, request, org_id):
+        current_page = 'home'
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        all_course = course_org.course_set.all()[:3]
+        all_teacher = course_org.teacher_set.all()[:1]
+        return render(request, 'org-detail-homepage.html', {
+            'all_course': all_course,
+            'all_teacher': all_teacher,
+            'course_org': course_org,
+            'current_page': current_page
+        })
+
+
+class OrgCourseView(View):
+    """
+    机构课程页面
+    """
+
+    def get(self, request, org_id):
+        current_page = 'course'
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        all_course = course_org.course_set.all()[:3]
+        return render(request, 'org-detail-course.html', {
+            'all_course': all_course,
+            'course_org': course_org,
+            'current_page': current_page
+        })
