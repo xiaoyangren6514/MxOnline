@@ -75,8 +75,6 @@ class OrgDetailView(View):
         current_page = 'home'
         course_org = CourseOrg.objects.get(id=int(org_id))
         has_fav = False
-        print(request.user)
-        print(request.user.is_authenticated())
         if request.user.is_authenticated():
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
