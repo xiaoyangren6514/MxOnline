@@ -71,7 +71,7 @@ class CourseDetailView(View):
         return render(request, 'course-detail.html', {
             'course': course,
             'course_org': course_org,
-            'has_fav': has_fav_org,
+            'has_fav_org': has_fav_org,
             'about_courses': about_courses,
             'has_fav_course': has_fav_course
         })
