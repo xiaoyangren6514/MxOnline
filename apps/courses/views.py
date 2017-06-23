@@ -53,13 +53,13 @@ class CourseDetailView(View):
         # 查看用户是否收藏当前课程机构
         has_fav_org = False
         if request.user.is_authenticated():
-            result = UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=int(course_id))
+            result = UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=course_org.id)
             if result:
                 has_fav_org = True
         # 查看用户是否收藏当前课程
         has_fav_course = False
         if request.user.is_authenticated():
-            result = UserFavorite.objects.filter(user=request.user, fav_type=1, fav_id=int(course_org.id))
+            result = UserFavorite.objects.filter(user=request.user, fav_type=1, fav_id=int(course.id))
             if result:
                 has_fav_course = True
         # 搜索相关课程

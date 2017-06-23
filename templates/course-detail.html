@@ -87,8 +87,7 @@
                     <a href="/company/14/">
                         <h2 class="center" title="清华大学">{{ course_org.name }}</h2>
                     </a>
-                    <div class="btn  notlogin
-					     " data-favid="14" id="jsRightBtn">
+                    <div class="btn  notlogin" data-favid="14"  id="jsRightBtn">
                         {% if has_fav_org %}已收藏{% else %}收藏{% endif %}
                     </div>
                     <div class="clear">
@@ -139,18 +138,17 @@
                     {% for course in about_courses %}
                     <dl>
                         <dt>
-                            <a target="_blank" href="">
+                            <a target="_blank" href="{% url 'course:course_detail' course.id %}">
                                 <img width="240" height="220" class="scrollLoading"
                                      src="{{ MEDIA_URL }}{{ course.image }}"/>
                             </a>
                         </dt>
                         <dd>
-                            <a target="_blank" href=""><h2> {{ course.name }}</h2></a>
+                            <a target="_blank" href="{% url 'course:course_detail' course.id %}"><h2> {{ course.name }}</h2></a>
                             <span class="fl">学习时长：<i class="key">{{ course.learn_times }}</i></span>
                         </dd>
                     </dl>
                     {% endfor %}
-
                 </div>
             </div>
         </div>
@@ -189,13 +187,12 @@
         });
     }
 
-    $('.colectgroupbtn').on('click', function () {
-        alert('aaa');
-        add_fav($(this), {{ course.id }}, 1);
+    $('#jsLeftBtn').on('click', function () {
+        add_fav($(this), {{ course.id }},1);
     });
 
     $('#jsRightBtn').on('click', function () {
-        add_fav($(this), {{ course_org.id }}, 2);
+        add_fav($(this), {{ course_org.id }},2);
     });
 
 
