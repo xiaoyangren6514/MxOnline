@@ -13,6 +13,7 @@ class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name='课程名称')
     desc = models.CharField(max_length=300, verbose_name='课程简介')
     detail = models.TextField(verbose_name='课程详情')
+    category = models.CharField(max_length=20, default='后端课程', verbose_name='课程类别')
     degree = models.CharField(max_length=10, choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')), verbose_name='课程难度')
     learn_times = models.IntegerField(default=0, verbose_name='学习时长(分钟数)')
     students = models.IntegerField(default=0, verbose_name='学习人数')
@@ -23,6 +24,20 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_zj_count(self):
+        """
+        获取章节数
+        :return:
+        """
+        return self.lesson_set.all().count()
+
+    def get_learn_students(self):
+        """
+        获取学习用户
+        :return:
+        """
+        return self.usercourse_set.all()
 
     class Meta:
         verbose_name = '课程'
