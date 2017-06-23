@@ -53,7 +53,7 @@
                         </ul>
                         <div class="btns">
                             <div class="btn colectgroupbtn" id="jsLeftBtn">
-                                收藏
+                                {% if has_fav_course %}已收藏{% else %}收藏{% endif %}
                             </div>
                             <div class="buy btn"><a style="color: white" href="course-video.html">开始学习</a></div>
                         </div>
@@ -89,7 +89,7 @@
                     </a>
                     <div class="btn  notlogin
 					     " data-favid="14" id="jsRightBtn">
-                        {% if has_fav %}已收藏{% else %}收藏{% endif %}
+                        {% if has_fav_org %}已收藏{% else %}收藏{% endif %}
                     </div>
                     <div class="clear">
                         <ul>
@@ -122,96 +122,7 @@
                 </div>
                 <div class="tab_cont tab_cont1">
 
-                    <p>&nbsp; &nbsp; django与vuejs实战项目</p>
-                    <p><img src="../media/courses/ueditor/aobama_20161113225044_773.png" title="" alt="aobama.png"/></p>
-                    <table>
-                        <tbody>
-                        <tr class="firstRow">
-                            <td style="word-break: break-all;" width="53" valign="top">课程</td>
-                            <td style="word-break: break-all;" width="53" valign="top">课时<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">难度<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">时长<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">学习人数<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">点击数<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">点击数</td>
-                            <td style="word-break: break-all;" width="53" valign="top">点击数</td>
-                        </tr>
-                        <tr>
-                            <td style="word-break: break-all;" width="53" valign="top">django开发<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">20<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">中级<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">30<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">100000<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">100000<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">100000<br/></td>
-                            <td style="word-break: break-all;" width="53" valign="top">100000<br/></td>
-                        </tr>
-                        <tr>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                        </tr>
-                        <tr>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                        </tr>
-                        <tr>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                        </tr>
-                        <tr>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                            <td width="53" valign="top"><br/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <p><br/></p>
-                    <p><img src="http://img.baidu.com/hi/jx2/j_0025.gif"/></p>
-                    <p><br/></p>
-                    <h1 class="ue_t" label="Title center" name="tc"
-                        style="border-bottom-color:#cccccc;border-bottom-width:2px;border-bottom-style:solid;padding:0px 4px 0px 0px;text-align:center;margin:0px 0px 20px;">
-                        <span style="color:#c0504d;">[键入文档标题]</span></h1>
-                    <p style="text-align:center;"><strong class="ue_t">[键入文档副标题]</strong></p>
-                    <h3><span class="ue_t" style="font-family:幼圆">[标题 1]</span></h3>
-                    <p class="ue_t" style="text-indent:2em;">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。
-                        您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。 您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-                    <p class="ue_t" style="text-indent:2em;"><img
-                            src="http://127.0.0.1:8000../media/courses/ueditor/57aa86a0000145c512000460_20161210234050_865.jpg"
-                            title="" alt="57aa86a0000145c512000460.jpg"/></p>
-                    <h3><span class="ue_t" style="font-family:幼圆">[标题 2]</span></h3>
-                    <p>
-                        <img src="http://api.map.baidu.com/staticimage?center=116.410899,39.863624&zoom=11&width=530&height=340&markers=116.404,39.915"
-                             width="530" height="340"/></p>
-                    <p class="ue_t" style="text-indent:2em;">在“开始”选项卡上，通过从快速样式库中为所选文本选择一种外观，您可以方便地更改文档中所选文本的格式。
-                        您还可以使用“开始”选项卡上的其他控件来直接设置文本格式。大多数控件都允许您选择是使用当前主题外观，还是使用某种直接指定的格式。</p>
-                    <h3><span class="ue_t" style="font-family:幼圆">[标题 3]</span></h3>
-                    <p>2016-12-10</p>
-                    <p class="ue_t">对于“插入”选项卡上的库，在设计时都充分考虑了其中的项与文档整体外观的协调性。 您可以使用这些库来插入表格、页眉、页脚、列表、封面以及其他文档构建基块。
-                        您创建的图片、图表或关系图也将与当前的文档外观协调一致。</p>
-                    <p><br/></p>
+                    <p>&nbsp; &nbsp; {{ course.detail }}</p>
 
                 </div>
                 <div class="tab_cont tab_cont2">
@@ -225,20 +136,20 @@
             <div class="right layout">
                 <div class="head">相关课程推荐</div>
                 <div class="group_recommend">
-
+                    {% for course in about_courses %}
                     <dl>
                         <dt>
                             <a target="_blank" href="">
                                 <img width="240" height="220" class="scrollLoading"
-                                     src="../media/courses/2016/11/540e57300001d6d906000338-240-135_mvvGYHL.jpg"/>
+                                     src="{{ MEDIA_URL }}{{ course.image }}"/>
                             </a>
                         </dt>
                         <dd>
-                            <a target="_blank" href=""><h2> django实战项目</h2></a>
-                            <span class="fl">学习时长：<i class="key">0</i></span>
+                            <a target="_blank" href=""><h2> {{ course.name }}</h2></a>
+                            <span class="fl">学习时长：<i class="key">{{ course.learn_times }}</i></span>
                         </dd>
                     </dl>
-
+                    {% endfor %}
 
                 </div>
             </div>
@@ -247,14 +158,14 @@
 </section>
 {% endblock %}
 
-
+{% block custom_js %}
 <script type="text/javascript">
     //收藏分享
     function add_fav(current_elem, fav_id, fav_type) {
         $.ajax({
             cache: false,
             type: "POST",
-            url: "/org/add_fav/",
+            url: "{% url 'course:course_add_fav' %}",
             data: {'fav_id': fav_id, 'fav_type': fav_type},
             async: true,
             beforeSend: function (xhr, settings) {
@@ -263,7 +174,7 @@
             success: function (data) {
                 if (data.status == 'fail') {
                     if (data.msg == '用户未登录') {
-                        window.location.href = "login.html";
+                        window.location.href = "/login";
                     } else {
                         alert(data.msg)
                     }
@@ -272,20 +183,21 @@
                     current_elem.text(data.msg)
                 }
             },
+            error:function (data) {
+                alert('data')
+            }
         });
     }
 
-    $('#jsLeftBtn').on('click', function () {
-        add_fav($(this), 10, 1);
+    $('.colectgroupbtn').on('click', function () {
+        alert('aaa');
+        add_fav($(this), {{ course.id }}, 1);
     });
 
     $('#jsRightBtn').on('click', function () {
-        add_fav($(this), 2, 2);
+        add_fav($(this), {{ course_org.id }}, 2);
     });
 
 
 </script>
-
-
-</body>
-</html>
+{% endblock %}

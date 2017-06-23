@@ -21,6 +21,7 @@ class Course(models.Model):
     image = models.ImageField(upload_to='courses/%Y/%M', verbose_name='封面图')
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    tag = models.CharField(default='', max_length=100, verbose_name='标签')
 
     def __str__(self):
         return self.name

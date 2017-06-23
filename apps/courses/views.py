@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.http import HttpResponse
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -50,13 +51,60 @@ class CourseDetailView(View):
         # 根据课程取出对应机构
         course_org = course.course_org
         # 查看用户是否收藏当前课程机构
-        has_fav = False
+        has_fav_org = False
         if request.user.is_authenticated():
-            result = UserFavorite.objects.filter(user=request.user,fav_type=2,fav_id=int(course_id))
+            result = UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=int(course_id))
             if result:
-                has_fav = True
+                has_fav_org = True
+        # 查看用户是否收藏当前课程
+        has_fav_course = False
+        if request.user.is_authenticated():
+            result = UserFavorite.objects.filter(user=request.user, fav_type=1, fav_id=int(course_org.id))
+            if result:
+                has_fav_course = True
+        # 搜索相关课程
+        tag = course.tag
+        if tag:
+            about_courses = Course.objects.filter(tag=tag)[:1]
+        else:
+            about_courses = []
         return render(request, 'course-detail.html', {
             'course': course,
-            'course_org':course_org,
-            'has_fav':has_fav
+            'course_org': course_org,
+            'has_fav': has_fav_org,
+            'about_courses': about_courses,
+            'has_fav_course': has_fav_course
         })
+
+
+class AddFavView(View):
+    def post(self, request):
+        fav_id = request.POST.get('fav_id', 0)
+        fav_type = request.POST.get('fav_type', 0)
+        if request.user.is_authenticated():
+            # 检测数据格式
+            if int(fav_id) > 0 and int(fav_type) > 0:
+                # 检测是否已存在对应记录
+                exist_records = UserFavorite.objects.filter(user=request.user, fav_type=int(fav_type),
+                                                            fav_id=int(fav_id))
+                if exist_records:
+                    # 取消收藏
+                    exist_records.delete()
+                    return HttpResponse('{"status":"success","msg":"收藏"}', content_type='application/json')
+                else:
+                    # 收藏
+                    user_fav = UserFavorite()
+                    user_fav.user = request.user
+                    user_fav.fav_id = int(fav_id)
+                    user_fav.fav_type = int(fav_type)
+                    user_fav.save()
+                    return HttpResponse('{"status":"success","msg":"已收藏"}', content_type='application/json')
+            else:
+                return HttpResponse('{"status":"fail","msg":"数据格式非法"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
+
+
+class DemoView(View):
+    def get(self, request):
+        return HttpResponse('{"status":1,"msg":"用户尚未登录"}', content_type='application/json', charset='utf-8')
