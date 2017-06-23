@@ -13,6 +13,7 @@ class CouseListView(View):
     def get(self, request):
         current_page = 'course'
         all_courses = Course.objects.all().order_by('-add_time')
+        hot_courses = all_courses.order_by('-click_nums')[:3]
         # 根据最新 热门 学习人数进行排序
         sort = request.GET.get('sort', '')
         if sort:
@@ -33,5 +34,6 @@ class CouseListView(View):
         return render(request, 'course-list.html', {
             'all_courses': courses,
             'current_page': current_page,
-            'sort': sort
+            'sort': sort,
+            'hot_courses':hot_courses
         })
