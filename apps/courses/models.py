@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.db import models
 
-from organization.models import CourseOrg
+from organization.models import CourseOrg, Teacher
 
 
 # Create your models here.
@@ -22,6 +22,9 @@ class Course(models.Model):
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     tag = models.CharField(default='', max_length=100, verbose_name='标签')
+    teacher = models.ForeignKey(Teacher, null=True, blank=True, verbose_name='讲师')
+    need_know = models.CharField(max_length=50, default='', verbose_name='课程须知')
+    can_learn = models.CharField(max_length=50, default='', verbose_name='可以学到什么')
 
     def __str__(self):
         return self.name
