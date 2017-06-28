@@ -6,7 +6,7 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Course
 
-from operation.models import UserFavorite
+from operation.models import UserFavorite, CourseComment
 
 
 # Create your views here.
@@ -124,8 +124,32 @@ class CourseVideoView(View):
             'course': course,
             'all_lessons': all_lessons,
             'all_resources': all_resources,
-            'teacher':teacher
+            'teacher': teacher
         })
+
+
+class CourseCommentView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_course_comments = course.coursecomment_set.all()
+        teacher = course.teacher
+        return render(request, 'course-comment.html', {
+            'course': course,
+            'all_course_comments': all_course_comments,
+            'teacher': teacher
+        })
+
+
+class CourseAddCommentView(View):
+    def post(self, request):
+        if not request.user.is_authenticated():
+            return HttpResponse('{"status":"fail","msg":"用户未登录"}')
+        user_comment = CourseComment()
+        user_comment.user = request.user
+        user_comment.course = Course.objects.get(id=int(request.POST.get('course_id', 0)))
+        user_comment.comments = request.POST.get('comments', '')
+        user_comment.save()
+        return HttpResponse('{"status":"success","msg":"提交成功"}')
 
 
 class DemoView(View):
