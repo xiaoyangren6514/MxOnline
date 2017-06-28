@@ -143,13 +143,13 @@ class CourseCommentView(View):
 class CourseAddCommentView(View):
     def post(self, request):
         if not request.user.is_authenticated():
-            return HttpResponse('{"status":"fail","msg":"用户未登录"}')
+            return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
         user_comment = CourseComment()
         user_comment.user = request.user
         user_comment.course = Course.objects.get(id=int(request.POST.get('course_id', 0)))
         user_comment.comments = request.POST.get('comments', '')
         user_comment.save()
-        return HttpResponse('{"status":"success","msg":"提交成功"}')
+        return HttpResponse('{"status":"success","msg":"提交成功"}', content_type='application/json')
 
 
 class DemoView(View):
