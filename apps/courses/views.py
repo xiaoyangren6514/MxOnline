@@ -13,8 +13,13 @@ from operation.models import UserFavorite
 
 
 class CouseListView(View):
+    """
+    课程列表页
+    """
+
     def get(self, request):
         current_page = 'course'
+        # 默认按照时间排序
         all_courses = Course.objects.all().order_by('-add_time')
         hot_courses = all_courses.order_by('-click_nums')[:3]
         # 根据最新 热门 学习人数进行排序
@@ -43,6 +48,10 @@ class CouseListView(View):
 
 
 class CourseDetailView(View):
+    """
+    课程详情页
+    """
+
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
         # 点击数+1
@@ -103,6 +112,16 @@ class AddFavView(View):
                 return HttpResponse('{"status":"fail","msg":"数据格式非法"}', content_type='application/json')
         else:
             return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
+
+
+class CourseVideoView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_lessons = course.lesson_set.all()
+        return render(request, 'course-video.html', {
+            'course': course,
+            'all_lessons': all_lessons
+        })
 
 
 class DemoView(View):

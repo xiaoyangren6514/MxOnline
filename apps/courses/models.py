@@ -49,6 +49,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
     name = models.CharField(max_length=100, verbose_name='章节名称')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    url = models.CharField(max_length=200, default="http://www.baidu.com", verbose_name='链接地址')
 
     def __str__(self):
         return self.name
@@ -62,6 +63,7 @@ class Video(models.Model):
     name = models.CharField(max_length=100, verbose_name='视频名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     lesson = models.ForeignKey(Lesson, verbose_name='章节')
+    learn_times = models.IntegerField(default=0, verbose_name='时长')
 
     def __str__(self):
         return self.name
