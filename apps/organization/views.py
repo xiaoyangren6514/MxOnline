@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.http import HttpResponse
 
-from .models import CityDict, CourseOrg
+from .models import CityDict, CourseOrg, Teacher
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import UserAskForm
@@ -178,3 +178,28 @@ class AddFavView(View):
                 return HttpResponse('{"status":"success","msg":"已收藏"}', content_type='application/json')
             else:
                 return HttpResponse('{"status":"fail","msg":"收藏出错"}', content_type='application/json')
+
+
+class TeacherListView(View):
+    def get(self, request):
+        all_teachers = Teacher.objects.all()
+        # 获取排序方式
+        sort = request.GET.get('sort', '')
+        if sort == 'hot':
+            all_teachers = all_teachers.order_by('-click_nums')
+        # 分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        # 实例分页类对象
+        p = Paginator(all_teachers, 3, request=request)
+        # 通过分页配置信息取到要显示的数据
+        teachers = p.page(page)
+        # 获取排行榜数据
+        hot_teachers = all_teachers.order_by('-click_nums')[:3]
+        return render(request, 'teachers-list.html', {
+            'all_teachers': teachers,
+            'hot_teachers': hot_teachers,
+            'sort': sort
+        })

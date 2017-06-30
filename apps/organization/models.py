@@ -55,6 +55,7 @@ class Teacher(models.Model):
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏数')
     image = models.ImageField(upload_to='teacher/%Y/%m', verbose_name='头像', null=True)
+    age = models.IntegerField(default=18, verbose_name='年龄')
 
     def __str__(self):
         return self.name
