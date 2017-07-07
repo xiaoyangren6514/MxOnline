@@ -153,6 +153,13 @@ class ModifyPwdView(View):
         })
 
 
+class UserCenterView(View):
+    def get(self, request):
+        return render(request, 'usercenter-info.html', {
+            'user': request.user
+        })
+
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')

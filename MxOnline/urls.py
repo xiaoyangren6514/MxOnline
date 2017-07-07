@@ -43,6 +43,8 @@ urlpatterns = [
 
     # 课程机构模块
     url(r'^org/', include('organization.urls', namespace='org')),
+    # 个人中心模块
+    url(r'^user/', include('users.urls', namespace='user')),
     # 公开课
     url(r'^course/', include('courses.urls', namespace='course')),
     # url(r'^org_list/$', OrgView.as_view(), name='org_list'),
