@@ -191,7 +191,7 @@ class TeacherListView(View):
         # 根据关键词进行搜索
         keywords = request.GET.get('keywords', '')
         if keywords:
-            all_teachers = all_teachers.filter(Q(name__icontains=keywords) | Q(desc__icontains=keywords))
+            all_teachers = all_teachers.filter(Q(name__icontains=keywords) | Q(work_company__icontains=keywords))
         # 获取排序方式
         sort = request.GET.get('sort', '')
         if sort == 'hot':
