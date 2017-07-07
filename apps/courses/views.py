@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.http import HttpResponse
+from django.db.models import Q
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -24,6 +25,10 @@ class CouseListView(View):
         # 默认按照时间排序
         all_courses = Course.objects.all().order_by('-add_time')
         hot_courses = all_courses.order_by('-click_nums')[:3]
+        # 根据关键词进行搜索
+        keywords = request.GET.get('keywords', '')
+        if keywords:
+            all_courses = all_courses.filter(Q(name__icontains=keywords) | Q(desc__icontains=keywords))
         # 根据最新 热门 学习人数进行排序
         sort = request.GET.get('sort', '')
         if sort:

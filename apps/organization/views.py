@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import HttpResponse
+from django.db.models import Q
 
 from .models import CityDict, CourseOrg, Teacher
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
@@ -15,6 +16,10 @@ class OrgView(View):
         # 取出全部课程和城市
         all_cities = CityDict.objects.all()
         all_orgs = CourseOrg.objects.all()
+        # 根据关键词进行搜索
+        keywords = request.GET.get('keywords', '')
+        if keywords:
+            all_orgs = all_orgs.filter(Q(name__icontains=keywords) | Q(desc__icontains=keywords))
         # 获取授课机构排名
         hot_orgs = all_orgs.order_by('-click_nums')[:3]
         # 根据城市进行排序
@@ -183,6 +188,10 @@ class AddFavView(View):
 class TeacherListView(View):
     def get(self, request):
         all_teachers = Teacher.objects.all()
+        # 根据关键词进行搜索
+        keywords = request.GET.get('keywords', '')
+        if keywords:
+            all_teachers = all_teachers.filter(Q(name__icontains=keywords) | Q(desc__icontains=keywords))
         # 获取排序方式
         sort = request.GET.get('sort', '')
         if sort == 'hot':
