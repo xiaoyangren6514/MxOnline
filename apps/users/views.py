@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.views.generic import View
+from django.http import HttpResponse
 
 from .models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password
 
-from .forms import LoginForm, RegisterForm, ForgetPwdForm, ResetPwdForm
+from .forms import LoginForm, RegisterForm, ForgetPwdForm, ResetPwdForm, UploadImageForm
 from utils.email_send import send_register_email
 
 
@@ -156,8 +157,17 @@ class ModifyPwdView(View):
 class UserCenterView(View):
     def get(self, request):
         return render(request, 'usercenter-info.html', {
-            'user': request.user
         })
+
+
+class UserUploadImageView(View):
+    def post(self, request):
+        upload_image_form = UploadImageForm(request.POST, request.FILES,instance=request.user)
+        if upload_image_form.is_valid():
+            upload_image_form.save()
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail"}', content_type='application/json')
 
 
 def user_login(request):
