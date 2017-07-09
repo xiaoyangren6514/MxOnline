@@ -25,9 +25,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'ehw$5q8%ng=+m3w4j+ycsicz%92r@qusfy24l%*lvy0al&po@w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = [
     'users.views.CustomBackend',
@@ -133,7 +133,7 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+# 如果debug为false的话该配置信息失效，因为一般静态文件都会有容器管理，比如nginx apache
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
@@ -148,6 +148,8 @@ EMAIL_USE_TLS = False
 # 文件上传配置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 生产环境时配置静态文件
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # pagination 设置
 PAGINATION_SETTINGS = {
