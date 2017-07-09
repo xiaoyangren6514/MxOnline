@@ -31,7 +31,8 @@
 
                     <div class="personal">
                         <dl class="user fr">
-                            <dd>{{ request.user.username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                            <dd>{{ request.user.username }}<img class="down fr"
+                                                                src="{% static 'images/top_down.png' %}"/></dd>
                             <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                         </dl>
                         <div class="userdetail">
@@ -170,8 +171,7 @@
             <div class="button">
                 <input class="changeemai_btn" id="jsChangeEmailBtn" type="button" value="完成"/>
             </div>
-            <input type='hidden' name='csrfmiddlewaretoken' value='DaP7IUKm9FA9nELA9YUlYYWpyIDdCiIP'/>
-            <input type='hidden' name='csrfmiddlewaretoken' value='799Y6iPeEDNSGvrTu3noBrO4MBLv6enY'/>
+            {% csrf_token %}
         </form>
     </div>
 

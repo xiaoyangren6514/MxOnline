@@ -8,6 +8,8 @@ from .models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password
 
+import json
+
 from .forms import LoginForm, RegisterForm, ForgetPwdForm, ResetPwdForm, UploadImageForm
 from utils.email_send import send_register_email
 
@@ -162,12 +164,43 @@ class UserCenterView(View):
 
 class UserUploadImageView(View):
     def post(self, request):
-        upload_image_form = UploadImageForm(request.POST, request.FILES,instance=request.user)
+        upload_image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
         if upload_image_form.is_valid():
             upload_image_form.save()
             return HttpResponse('{"status":"success"}', content_type='application/json')
         else:
             return HttpResponse('{"status":"fail"}', content_type='application/json')
+
+
+class UserModifyPwd(View):
+    def post(self, request):
+        pwd = request.POST.get('password', '')
+        pwd1 = request.POST.get('password1', '')
+        if pwd == pwd1:
+            request.user.password = make_password(pwd)
+            request.user.save()
+            return HttpResponse('{"status":"success","msg":"修改密码成功"}', content_type='application/json')
+        else:
+            return HttpResponse(json.dumps(), content_type='application/json')
+
+
+class UpdateEmailView(View):
+    def get(self, request):
+        email = request.GET.get('email', '')
+        if UserProfile.objects.filter(email=email):
+            return HttpResponse('{"status":"fail","msg":"邮箱已存在"}', content_type='application/json')
+        if send_register_email(email, 'update_email'):
+            return HttpResponse('{"status":"success","msg":"发送成功"}', content_type='application/json')
+
+
+class UpdateEmailVerifyView(View):
+    def get(self, request):
+        verify_email_code = request.GET.get('code', '')
+        email = request.GET.get('email', '')
+        if EmailVerifyRecord.objects.filter(code=int(verify_email_code), email=email, type='update_email'):
+            pass
+        else:
+            return HttpResponse('{"status":"fail","msg":"验证码错误"}', content_type='application/json')
 
 
 def user_login(request):
