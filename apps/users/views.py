@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.views.generic import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
@@ -201,6 +201,13 @@ class UpdateEmailVerifyView(View):
             pass
         else:
             return HttpResponse('{"status":"fail","msg":"验证码错误"}', content_type='application/json')
+
+
+class LogoutView(View):
+    def get(self, request):
+        login(request)
+        from django.core.urlresolvers import reverse
+        return HttpResponseRedirect(reverse('index'))
 
 
 def user_login(request):
